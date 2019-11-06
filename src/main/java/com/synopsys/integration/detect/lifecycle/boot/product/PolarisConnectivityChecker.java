@@ -53,7 +53,6 @@ public class PolarisConnectivityChecker {
 
     private ConnectionResult attemptConnection(final PolarisServerConfig polarisServerConfig) {
         String errorMessage = null;
-        Exception caughtException = null;
         int httpStatusCode = 0;
 
         try {
@@ -67,12 +66,11 @@ public class PolarisConnectivityChecker {
             }
         } catch (final Exception e) {
             errorMessage = e.getMessage();
-            caughtException = e;
         }
 
         if (null != errorMessage) {
             logger.error(errorMessage);
-            return ConnectionResult.FAILURE(httpStatusCode, errorMessage, caughtException);
+            return ConnectionResult.FAILURE(httpStatusCode, errorMessage);
         }
 
         logger.info("A successful connection was made.");

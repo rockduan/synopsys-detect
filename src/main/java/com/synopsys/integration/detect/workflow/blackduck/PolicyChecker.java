@@ -28,8 +28,9 @@ import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.synopsys.integration.blackduck.api.generated.enumeration.PolicySummaryStatusType;
-import com.synopsys.integration.blackduck.api.generated.view.VersionBomPolicyStatusView;
+
+import com.synopsys.integration.blackduck.api.generated.view.ProjectVersionPolicyStatusView;
+import com.synopsys.integration.blackduck.api.manual.throwaway.generated.enumeration.PolicySummaryStatusType;
 import com.synopsys.integration.detect.exitcode.ExitCodeType;
 import com.synopsys.integration.detect.lifecycle.shutdown.ExitCodeRequest;
 import com.synopsys.integration.detect.workflow.event.Event;
@@ -68,7 +69,7 @@ public class PolicyChecker {
      * @throws IntegrationException
      */
     public Optional<PolicyStatusDescription> getPolicyStatus(final ProjectBomService projectBomService, final ProjectVersionView version) throws IntegrationException {
-        final Optional<VersionBomPolicyStatusView> versionBomPolicyStatusView = projectBomService.getPolicyStatusForVersion(version);
+        final Optional<ProjectVersionPolicyStatusView> versionBomPolicyStatusView = projectBomService.getPolicyStatusForVersion(version);
         if (!versionBomPolicyStatusView.isPresent()) {
             return Optional.empty();
         }

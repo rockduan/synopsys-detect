@@ -1,8 +1,8 @@
 package com.synopsys.integration.detect.integration;
 
 import com.synopsys.integration.blackduck.api.generated.view.CodeLocationView;
+import com.synopsys.integration.blackduck.api.generated.view.ProjectVersionComponentView;
 import com.synopsys.integration.blackduck.api.generated.view.ProjectVersionView;
-import com.synopsys.integration.blackduck.api.generated.view.VersionBomComponentView;
 import com.synopsys.integration.blackduck.configuration.BlackDuckServerConfig;
 import com.synopsys.integration.blackduck.configuration.BlackDuckServerConfigBuilder;
 import com.synopsys.integration.blackduck.service.*;
@@ -83,7 +83,7 @@ public class BlackDuckIntegrationTest {
         List<CodeLocationView> codeLocations = blackDuckService.getAllResponses(optionalProjectVersionWrapper.get().getProjectVersionView(), ProjectVersionView.CODELOCATIONS_LINK_RESPONSE);
         assertEquals(0, codeLocations.size());
 
-        List<VersionBomComponentView> bomComponents = projectBomService.getComponentsForProjectVersion(optionalProjectVersionWrapper.get().getProjectVersionView());
+        List<ProjectVersionComponentView> bomComponents = projectBomService.getComponentsForProjectVersion(optionalProjectVersionWrapper.get().getProjectVersionView());
         assertEquals(0, bomComponents.size());
 
         return optionalProjectVersionWrapper.get();

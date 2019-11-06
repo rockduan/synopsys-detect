@@ -1,9 +1,10 @@
 package com.synopsys.integration.detect.integration;
 
 import com.synopsys.integration.blackduck.api.generated.view.CodeLocationView;
+import com.synopsys.integration.blackduck.api.generated.view.ProjectVersionComponentView;
 import com.synopsys.integration.blackduck.api.generated.view.ProjectVersionView;
 import com.synopsys.integration.blackduck.api.generated.view.ProjectView;
-import com.synopsys.integration.blackduck.api.generated.view.VersionBomComponentView;
+import com.synopsys.integration.blackduck.api.manual.throwaway.generated.view.VersionBomComponentView;
 import com.synopsys.integration.blackduck.service.model.ProjectVersionWrapper;
 import com.synopsys.integration.detect.Application;
 import com.synopsys.integration.exception.IntegrationException;
@@ -94,9 +95,9 @@ public class DetectOnDetectHappyPath extends BlackDuckIntegrationTest {
         }
         assertEquals(codeLocationNameSuffixesToCheck.size(), matches);
 
-        List<VersionBomComponentView> bomComponents = projectBomService.getComponentsForProjectVersion(projectVersionWrapper.getProjectVersionView());
+        List<ProjectVersionComponentView> bomComponents = projectBomService.getComponentsForProjectVersion(projectVersionWrapper.getProjectVersionView());
         // We used to look for blackduck-common, but we adopt new versions faster than KB can pick them up
-        Optional<VersionBomComponentView> blackDuckCommonComponent = bomComponents.stream().filter(versionBomComponentView -> "jackson-core".equals(versionBomComponentView.getComponentName())).findFirst();
+        Optional<ProjectVersionComponentView> blackDuckCommonComponent = bomComponents.stream().filter(versionBomComponentView -> "jackson-core".equals(versionBomComponentView.getComponentName())).findFirst();
         assertTrue(blackDuckCommonComponent.isPresent());
     }
 
